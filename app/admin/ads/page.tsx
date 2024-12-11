@@ -12,6 +12,10 @@ const page = async () => {
   const { data, error } = await supabase.from("ads").select();
 
   if (error) return <div>something went wrong</div>;
+  if (!data || data.length === 0) {
+    // Redirigir a la página 404 si no hay anuncios
+    redirect('/404');
+  }
   return (
     <>
       <CreateAds />
